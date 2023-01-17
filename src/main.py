@@ -82,9 +82,9 @@ def url_parse(raw_url: str, post: bool = False) -> str:
 
 def webhook(container: Entry) -> None:
     description: str = (
-        f"A new [**forum post**]({container.last_post_url}) "
-        f"was made by [{container.author_name}]({container.author_url}) "
-        f"in the [{container.forum_name}]({container.forum_url}) forum"
+        f"New [**post**]({container.last_post_url}) "
+        f"by [{container.author_name}]({container.author_url}) "
+        f"in [{container.forum_name}]({container.forum_url})"
     )
 
     form: cordhook.Form = cordhook.Form()
@@ -92,9 +92,7 @@ def webhook(container: Entry) -> None:
     form.username(os.getenv("WEBHOOK_USERNAME"))
     form.avatar_url(os.getenv("WEBHOOK_AVATAR"))
     form.embed_color(0000000)
-    form.embed_title("Forum activity")
     form.embed_description(description)
-    form.embed_footer(text="by tainn")
 
     for hook in json.loads(os.getenv("WEBHOOK_CHANNELS")):
         form.post(hook)
