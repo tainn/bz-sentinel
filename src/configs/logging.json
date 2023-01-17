@@ -2,7 +2,7 @@
   "version": 1,
   "loggers": {
     "root": {
-      "level": "DEBUG",
+      "level": "INFO",
       "handlers": [
         "default"
       ]
@@ -10,7 +10,7 @@
   },
   "handlers": {
     "default": {
-      "level": "DEBUG",
+      "level": "INFO",
       "class": "logging.StreamHandler",
       "formatter": "standard"
     }
