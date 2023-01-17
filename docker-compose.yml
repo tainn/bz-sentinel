@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  bz-sentinel:
+    build:
+      context: .
+    image: bz-sentinel:1
+    container_name: bz-sentinel
+    restart: unless-stopped
+    networks:
+      - bz
+    env_file:
+      - .env
+    volumes:
+      - /var/data/bz-sentinel:/app/data
+    working_dir: /app
+    command: main.py
+
+networks:
+  bz:
+    external: true
