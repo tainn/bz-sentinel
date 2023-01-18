@@ -29,7 +29,7 @@ def main() -> None:
     res: Response = requests.get(url, timeout=10)
 
     soup: BeautifulSoup = BeautifulSoup(res.text, "html.parser")
-    entries: ResultSet = soup.find_all("div", {"class": "responsive-show"})  # all entries under active topics
+    entries: ResultSet = soup.find_all("div", {"class": "responsive-show"})  # author, last post, forum
 
     persistence_path: str = os.getenv("PERSISTENCE_JSON")
 
@@ -41,7 +41,7 @@ def main() -> None:
         struct: list[str] = json.load(rf)
 
     for entry in entries:
-        entry_data: ResultSet = entry.find_all("a")  # author, last post, forum
+        entry_data: ResultSet = entry.find_all("a")
 
         container: Entry = Entry()
 
