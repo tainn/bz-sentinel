@@ -8,7 +8,7 @@ from dataclasses import dataclass
 
 import cordhook
 import requests
-from bs4 import BeautifulSoup, ResultSet
+from bs4 import BeautifulSoup, ResultSet, Tag
 from requests import Response
 
 from utils import logutil
@@ -21,6 +21,8 @@ class Entry:
     last_post_url: str = None
     forum_name: str = None
     forum_url: str = None
+    thread_name: str = None
+    thread_url: str = None
 
 
 def main() -> None:
@@ -29,7 +31,7 @@ def main() -> None:
     res: Response = requests.get(url, timeout=10)
 
     soup: BeautifulSoup = BeautifulSoup(res.text, "html.parser")
-    entries: ResultSet = soup.find_all("div", {"class": "responsive-show"})  # author, last post, forum
+    entries: ResultSet = soup.find_all("div", {"class": "list-inner"})
 
     persistence_path: str = os.getenv("PERSISTENCE_JSON")
 
@@ -41,15 +43,22 @@ def main() -> None:
         struct: list[str] = json.load(rf)
 
     for entry in entries:
-        entry_data: ResultSet = entry.find_all("a")
+        if entry.find("div", {"class": "responsive-show"}) is None:
+            continue
+
+        triple: Tag = entry.find("div", {"class": "responsive-show"})  # author, last post, forum
+        triple_data: ResultSet = triple.find_all("a")
+        single: Tag = entry.find("a", {"class": "topictitle"})  # thread
 
         container: Entry = Entry()
 
-        container.author_name = entry_data[0].text
-        container.author_url = url_parse(entry_data[0]["href"])
-        container.last_post_url = url_parse(entry_data[1]["href"], post=True)
-        container.forum_name = entry_data[2].text
-        container.forum_url = url_parse(entry_data[2]["href"])
+        container.author_name = triple_data[0].text
+        container.author_url = url_parse(triple_data[0]["href"])
+        container.last_post_url = url_parse(triple_data[1]["href"], post=True)
+        container.forum_name = triple_data[2].text
+        container.forum_url = url_parse(triple_data[2]["href"])
+        container.thread_name = single.text
+        container.thread_url = url_parse(single["href"])
 
         if container.last_post_url in struct:
             logging.debug(f"Post previously already collected: {container.last_post_url.split('#')[-1]}")
@@ -84,7 +93,7 @@ def webhook(container: Entry) -> None:
     description: str = (
         f"New [**post**]({container.last_post_url}) "
         f"by [{container.author_name}]({container.author_url}) "
-        f"in [{container.forum_name}]({container.forum_url})"
+        f"in [{container.thread_name}]({container.thread_url})"
     )
 
     form: cordhook.Form = cordhook.Form()
