@@ -108,9 +108,10 @@ def webhook(container: Entry) -> None:
 
 
 if __name__ == "__main__":
+    logutil.configure()
+
     while True:
         try:
-            logutil.configure()
             main()
         except Exception as e:
             logging.error(f"Wrapping exception handle: {e}")
