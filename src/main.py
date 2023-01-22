@@ -19,6 +19,7 @@ class Entry:
     author_name: str = None
     author_url: str = None
     last_post_url: str = None
+    last_post_id: str = None
     forum_name: str = None
     forum_url: str = None
     thread_name: str = None
@@ -55,18 +56,19 @@ def main() -> None:
         container.author_name = triple_data[0].text
         container.author_url = url_parse(triple_data[0]["href"])
         container.last_post_url = url_parse(triple_data[1]["href"], post=True)
+        container.last_post_id = container.last_post_url.split('#')[-1]
         container.forum_name = triple_data[2].text
         container.forum_url = url_parse(triple_data[2]["href"])
         container.thread_name = single.text
         container.thread_url = url_parse(single["href"])
 
-        if container.last_post_url in struct:
-            logging.debug(f"Post previously already collected: {container.last_post_url.split('#')[-1]}")
+        if container.last_post_id in struct:
+            logging.debug(f"Post previously already collected: {container.last_post_id}")
             continue
 
-        logging.info(f"New post collected: {container.last_post_url.split('#')[-1]}")
+        logging.info(f"New post collected: {container.last_post_id}")
 
-        struct.append(container.last_post_url)
+        struct.append(container.last_post_id)
 
         if len(struct) > int(os.getenv("PERSIST_QUANTITY")):
             struct.pop(0)
