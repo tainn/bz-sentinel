@@ -10,7 +10,7 @@ the [BZFlag forums](https://forums.bzflag.org).
 Uses an external network that has to be predefined.
 
 ```commandline
-docker network create bz
+docker network create bzf
 ```
 
 ### Env vars
