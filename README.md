@@ -1,6 +1,6 @@
 # bz-sentinel
 
-[![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![code style: black](https://img.shields.io/badge/style-black-000000.svg)](https://github.com/psf/black)
 
 A monitoring app that posts a Discord channel webhook whenever a new forum post is recorded on
 the [BZFlag forums](https://forums.bzflag.org).
