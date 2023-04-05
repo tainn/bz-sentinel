@@ -17,19 +17,19 @@ docker network create bzf
 
 A collection of configurable environment variables is read by the app, all of which should be specified in an `.env`
 file inside the project's root. See `.env.example` for a reference and defaults, excluding the
-sensitive `WEBHOOK_CHANNELS` list.
+sensitive `BZS_WEBHOOK_CHANNELS` list.
 
-| env var | description                               |
-| ------- |-------------------------------------------|
-| `LOGGING_JSON` | path to the log config file               |
-| `PERSISTENCE_JSON` | path to the file-based persistence        |
-| `DOMAIN` | domain of the phpBB forum                 |
-| `PERSIST_QUANTITY` | amount of last posts to persist           |
-| `MONITOR_INTERVAL` | request interval in seconds               |
-| `ERR_RETRY_INTERVAL` | on-error retry interval in seconds        |
-| `WEBHOOK_USERNAME` | webhook's appeared username               |
-| `WEBHOOK_AVATAR` | webhook's displayed avatar                |
-| `WEBHOOK_CHANNELS` | a list of webhook channel urls, minimum 1 |
+| env var                  | description                               |
+|--------------------------|-------------------------------------------|
+| `BZS_LOGGING_JSON`       | path to the log config file               |
+| `BZS_PERSISTENCE_JSON`   | path to the file-based persistence        |
+| `BZS_DOMAIN`             | domain of the phpBB forum                 |
+| `BZS_PERSIST_QUANTITY`   | amount of last posts to persist           |
+| `BZS_MONITOR_INTERVAL`   | request interval in seconds               |
+| `BZS_ERR_RETRY_INTERVAL` | on-error retry interval in seconds        |
+| `BZS_WEBHOOK_USERNAME`   | webhook's appeared username               |
+| `BZS_WEBHOOK_AVATAR`     | webhook's displayed avatar                |
+| `BZS_WEBHOOK_CHANNELS`   | a list of webhook channel urls, minimum 1 |
 
 ### Run
 
