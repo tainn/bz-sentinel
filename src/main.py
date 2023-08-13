@@ -99,6 +99,8 @@ if __name__ == "__main__":
     utils.conf_logs()
     logger = getLogger(__name__)
 
+    logger.info("Running bz-sentinel...")
+
     while True:
         try:
             main()
