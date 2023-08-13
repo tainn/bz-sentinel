@@ -1,2 +1,13 @@
 [tool.black]
 line-length = 120
+
+[tool.ruff]
+line-length = 120
+src = ["src"]
+select = ["I001"]
+
+[tool.ruff.isort]
+known-first-party = ["src"]
+
+[tool.mypy]
+strict = true
