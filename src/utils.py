@@ -28,13 +28,6 @@ def conf_logs() -> None:
 
     logging.basicConfig(
         level=level.get(os.getenv("BZS_LOG_LEVEL", "INFO")),
-        format=(
-            "{"
-            '"time": "%(asctime)s", '
-            '"level": "%(levelname)s", '
-            '"name": "%(name)s", '
-            '"message": "%(message)s"'
-            "}"
-        ),
+        format='{"time": "%(asctime)s", "level": "%(levelname)s", "name": "%(name)s", "message": "%(message)s"}',
         force=True,
     )
