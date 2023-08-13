@@ -36,4 +36,5 @@ def conf_logs() -> None:
             '"message": "%(message)s"'
             "}"
         ),
+        force=True,
     )
