@@ -4,8 +4,6 @@ from dataclasses import dataclass
 from logging import Logger, getLogger
 from typing import Any
 
-logger: Logger = getLogger(__name__)
-
 
 @dataclass
 class Struct:
@@ -40,5 +38,7 @@ def conf_logs() -> None:
             "}"
         ),
     )
+
+    logger: Logger = getLogger(__name__)
 
     logger.info("Logging configured")
