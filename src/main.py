@@ -3,14 +3,15 @@
 import json
 import os
 import time
-from logging import Logger, getLogger
+from logging import getLogger
 
 import httpx
 from bs4 import BeautifulSoup, ResultSet, Tag
 from cordhook import Form
 from httpx import Response
 
-from utils import Struct, conf_logs
+import utils
+from utils import Struct
 
 
 def main() -> None:
@@ -38,12 +39,12 @@ def main() -> None:
         auth_lp_forum_data: ResultSet = auth_lp_forum.find_all("a")
         thread: Tag = entry.find("a", {"class": "topictitle"})
 
-        struct: Struct = Struct()
+        struct: Struct = utils.Struct()
 
         struct.author_name = auth_lp_forum_data[0].text
         struct.author_url = url_parse(auth_lp_forum_data[0]["href"])
         struct.last_post_url = url_parse(auth_lp_forum_data[1]["href"], post=True)
-        struct.last_post_id = struct.last_post_url.split('#')[-1]
+        struct.last_post_id = struct.last_post_url.split("#")[-1]
         struct.forum_name = auth_lp_forum_data[2].text
         struct.forum_url = url_parse(auth_lp_forum_data[2]["href"])
         struct.thread_name = thread.text
@@ -71,7 +72,7 @@ def url_parse(raw_url: str, post: bool = False) -> str:
 
     if post:
         post_id: str = clean_url.split("=")[-1]
-        clean_url: str = f"{clean_url}#p{post_id}"
+        clean_url = f"{clean_url}#p{post_id}"
 
     return f"{os.getenv('BZS_DOMAIN')}/{clean_url[2:]}"
 
@@ -90,12 +91,12 @@ def discord_webhook(ec: Struct) -> None:
     form.embed_color(0000000)
     form.embed_description(description)
 
-    for hook in json.loads(os.getenv("BZS_WEBHOOK_CHANNELS")):
+    for hook in json.loads(os.getenv("BZS_WEBHOOK_CHANNELS", "")):
         form.post(hook)
 
 
 if __name__ == "__main__":
-    conf_logs()
+    utils.conf_logs()
     logger = getLogger(__name__)
 
     while True:

@@ -9,14 +9,14 @@ logger: Logger = getLogger(__name__)
 
 @dataclass
 class Struct:
-    author_name: str = None
-    author_url: str = None
-    last_post_url: str = None
-    last_post_id: str = None
-    forum_name: str = None
-    forum_url: str = None
-    thread_name: str = None
-    thread_url: str = None
+    author_name: str = ""
+    author_url: str = ""
+    last_post_url: str = ""
+    last_post_id: str = ""
+    forum_name: str = ""
+    forum_url: str = ""
+    thread_name: str = ""
+    thread_url: str = ""
 
 
 def conf_logs() -> None:
