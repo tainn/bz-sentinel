@@ -2,7 +2,7 @@ import os
 import sys
 from dataclasses import dataclass
 
-from loguru import logger
+from loguru import Logger, logger
 
 
 @dataclass
@@ -17,11 +17,12 @@ class Struct:
     thread_url: str = ""
 
 
-def conf_logger() -> None:
+def init_logger() -> Logger:
     logger.remove(0)
     logger.add(
         sys.stdout,
-        format="{time} {level} {message}",
+        format="{message}",
         level=os.getenv("BZS_LOG_LEVEL", "INFO"),
         serialize=True,
     )
+    return logger

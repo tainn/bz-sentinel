@@ -8,7 +8,7 @@ import httpx
 from bs4 import BeautifulSoup, ResultSet, Tag
 from cordhook import Form
 from httpx import Response
-from loguru import logger
+from loguru import Logger
 
 import utils
 from utils import Struct
@@ -96,7 +96,7 @@ def discord_webhook(ec: Struct) -> None:
 
 
 if __name__ == "__main__":
-    utils.conf_logger()
+    logger: Logger = utils.init_logger()
     logger.info("Running bz-sentinel...")
 
     while True:
