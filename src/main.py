@@ -4,7 +4,6 @@ import json
 import os
 import time
 from dataclasses import dataclass
-from pathlib import Path
 
 import httpx
 from bs4 import BeautifulSoup, ResultSet, Tag
@@ -38,8 +37,6 @@ def main() -> None:
     persistence_path: str = "/data/persistence.json"
 
     if not os.path.exists(persistence_path):
-        Path(persistence_path).parent.mkdir(parents=True, exist_ok=True)
-
         with open(persistence_path, "w") as wf:
             wf.write("[]")
 

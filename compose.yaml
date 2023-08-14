@@ -12,7 +12,7 @@ services:
     env_file:
       - .env
     volumes:
-      - /var/data/bz-sentinel:/src/data
+      - /var/data/bz-sentinel:/data
     command: /src/main.py
 
 networks:
