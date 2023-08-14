@@ -1,10 +1,11 @@
 import os
 import sys
 
-from loguru import Logger, logger
+import loguru
+from loguru import logger
 
 
-def get_logger() -> Logger:
+def get_logger() -> loguru.Logger:
     logger.remove(0)
     logger.add(
         sys.stdout,
