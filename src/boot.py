@@ -1,11 +1,12 @@
+from __future__ import annotations
+
 import os
 import sys
 
-import loguru
-from loguru import logger
+from loguru import Logger, logger
 
 
-def get_logger() -> loguru.Logger:
+def get_logger() -> Logger:
     logger.remove(0)
     logger.add(
         sys.stdout,
