@@ -2,7 +2,7 @@ import os
 import sys
 from dataclasses import dataclass
 
-from loguru import Logger, logger
+from loguru import Logger
 
 
 @dataclass
@@ -17,7 +17,7 @@ class Struct:
     thread_url: str = ""
 
 
-def init_logger() -> Logger:
+def config_logger(logger: Logger) -> Logger:
     logger.remove(0)
     logger.add(
         sys.stdout,

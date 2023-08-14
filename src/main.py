@@ -8,7 +8,7 @@ import httpx
 from bs4 import BeautifulSoup, ResultSet, Tag
 from cordhook import Form
 from httpx import Response
-from loguru import Logger
+from loguru import Logger, logger
 
 import utils
 from utils import Struct
@@ -51,10 +51,10 @@ def main() -> None:
         struct.thread_url = url_parse(thread["href"])
 
         if struct.last_post_id in persist:
-            logger.debug(f"Post previously already collected: {struct.last_post_id}")
+            log.debug(f"Post previously already collected: {struct.last_post_id}")
             continue
 
-        logger.info(f"New post collected: {struct.last_post_id}")
+        log.info(f"New post collected: {struct.last_post_id}")
 
         persist.append(struct.last_post_id)
 
@@ -96,13 +96,13 @@ def discord_webhook(ec: Struct) -> None:
 
 
 if __name__ == "__main__":
-    logger: Logger = utils.init_logger()
-    logger.info("Running bz-sentinel...")
+    log: Logger = utils.config_logger(logger)
+    log.info("Running bz-sentinel...")
 
     while True:
         try:
             main()
             time.sleep(float(os.getenv("BZS_MONITOR_INTERVAL", 60)))
         except Exception as e:
-            logger.error(f"Global exception caught: {e}")
+            log.error(f"Global exception caught: {e}")
             time.sleep(float(os.getenv("BZS_ERR_RETRY_INTERVAL", 120)))
