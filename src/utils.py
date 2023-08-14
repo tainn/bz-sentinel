@@ -1,7 +1,8 @@
-import logging
 import os
+import sys
 from dataclasses import dataclass
-from typing import Any
+
+from loguru import logger
 
 
 @dataclass
@@ -16,25 +17,11 @@ class Struct:
     thread_url: str = ""
 
 
-def conf_logs() -> None:
-    level: dict[str, Any] = {
-        "NOTSET": logging.NOTSET,
-        "DEBUG": logging.DEBUG,
-        "INFO": logging.INFO,
-        "WARNING": logging.WARNING,
-        "ERROR": logging.ERROR,
-        "CRITICAL": logging.CRITICAL,
-    }
-
-    logging.basicConfig(
-        level=level.get(os.getenv("BZS_LOG_LEVEL", "INFO")),
-        format=(
-            "{"
-            '"time": "%(asctime)s", '
-            '"level": "%(levelname)s", '
-            '"name": "%(name)s", '
-            '"message": "%(message)s"'
-            "}"
-        ),
-        force=True,
+def conf_logger() -> None:
+    logger.remove(0)
+    logger.add(
+        sys.stdout,
+        format="{time} {level} {message}",
+        level=os.getenv("BZS_LOG_LEVEL", "INFO"),
+        serialize=True,
     )

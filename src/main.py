@@ -3,12 +3,12 @@
 import json
 import os
 import time
-from logging import getLogger
 
 import httpx
 from bs4 import BeautifulSoup, ResultSet, Tag
 from cordhook import Form
 from httpx import Response
+from loguru import logger
 
 import utils
 from utils import Struct
@@ -39,7 +39,7 @@ def main() -> None:
         auth_lp_forum_data: ResultSet = auth_lp_forum.find_all("a")
         thread: Tag = entry.find("a", {"class": "topictitle"})
 
-        struct: Struct = utils.Struct()
+        struct: Struct = Struct()
 
         struct.author_name = auth_lp_forum_data[0].text
         struct.author_url = url_parse(auth_lp_forum_data[0]["href"])
@@ -96,9 +96,7 @@ def discord_webhook(ec: Struct) -> None:
 
 
 if __name__ == "__main__":
-    utils.conf_logs()
-    logger = getLogger(__name__)
-
+    utils.conf_logger()
     logger.info("Running bz-sentinel...")
 
     while True:
