@@ -34,7 +34,7 @@ def main() -> None:
     soup: BeautifulSoup = BeautifulSoup(res.text, "html.parser")
     entries: ResultSet = soup.find_all("div", {"class": "list-inner"})
 
-    persistence_path: str = "/src/data/persistence.json"
+    persistence_path: str = "/data/persistence.json"
 
     if not os.path.exists(persistence_path):
         with open(persistence_path, "w") as wf:
