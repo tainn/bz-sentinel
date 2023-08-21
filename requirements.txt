@@ -1,4 +1,4 @@
-git+https://github.com/tainn/discord-webhook
+discord-webhook @ git+https://github.com/tainn/discord-webhook@v2.7
+loguru>=0.7.0
 httpx>=0.23.3
 beautifulsoup4>=4.11.1
-loguru>=0.7.0
