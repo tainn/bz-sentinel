@@ -118,4 +118,4 @@ if __name__ == "__main__":
             time.sleep(float(os.getenv("BZS_MONITOR_INTERVAL", 60)))
         except Exception as e:
             logger.error(f"Global exception caught: {e}")
-            time.sleep(float(os.getenv("BZS_ERR_RETRY_INTERVAL", 120)))
+            time.sleep(float(os.getenv("BZS_ERR_RETRY_INTERVAL", 3600)))
