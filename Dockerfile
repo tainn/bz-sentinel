@@ -1,11 +1,12 @@
-FROM fedora:38 as builder
-ENV PYTHONPATH="/src:$PYTHONPATH"
-ENV CONTAINERIZED=1
-RUN dnf install -y python3-pip
-RUN dnf install -y git
+FROM python:3.11.5-alpine3.18
 
-FROM builder
+ENV PYTHONPATH="/src:$PYTHONPATH"
+ENV PYTHONUNBUFFERED=1
+ENV CRUNTIME=1
+
+RUN apk add git
+
 COPY src /src
 COPY requirements.txt /
 RUN python3 -m pip install -r requirements.txt
-ENTRYPOINT ["python3", "-u"]
+ENTRYPOINT ["python3"]

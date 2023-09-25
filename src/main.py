@@ -109,7 +109,6 @@ def discord_webhook(ec: Struct) -> None:
 
 if __name__ == "__main__":
     boot.init_logger()
-    logger = logger.opt(raw=True)
     logger.info("Running bz-sentinel...")
 
     while True:
