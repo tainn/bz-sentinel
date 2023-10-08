@@ -13,7 +13,7 @@ A collection of configurable environment variables is read by the app, all of wh
 inside the project's root. See **.env.example** for a reference and defaults, excluding the
 sensitive `BZS_WEBHOOK_CHANNELS` list.
 
-## Network
+## Run
 
 Uses an external network that has to be predefined.
 
@@ -21,10 +21,8 @@ Uses an external network that has to be predefined.
 docker network create bzf
 ```
 
-## Run
-
-Run as a daemon using docker-compose.
+Run as a daemon using docker compose.
 
 ```console
-docker-compose up -d
+docker compose up -d
 ```
