@@ -19,10 +19,5 @@ Uses an external network that has to be predefined.
 
 ```console
 docker network create bzf
-```
-
-Run as a daemon using docker compose.
-
-```console
 docker compose up -d
 ```
