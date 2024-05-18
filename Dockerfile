@@ -1,12 +1,13 @@
-FROM python:3.11.5-alpine3.18
+FROM python:3.12.3-alpine3.19
 
 ENV PYTHONPATH="/src:$PYTHONPATH"
 ENV PYTHONUNBUFFERED=1
 ENV CRUNTIME=1
 
-RUN apk add git
-
 COPY src /src
-COPY requirements.txt /
-RUN python3 -m pip install -r requirements.txt
+COPY pyproject.toml /
+
+RUN apk add git
+RUN python3 -m pip install .
+
 ENTRYPOINT ["python3"]
