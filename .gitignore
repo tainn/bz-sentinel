@@ -1,6 +1,6 @@
 # dev
 .idea
-*.xml
+*.iml
 venv
 .venv
 .ruff_cache
