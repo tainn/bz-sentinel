@@ -4,7 +4,7 @@ services:
   bz-sentinel:
     build:
       context: .
-    image: bz-sentinel:0.1.8
+    image: bz-sentinel:0.1.10
     container_name: bz-sentinel
     restart: unless-stopped
     env_file:
