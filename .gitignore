@@ -1,9 +1,11 @@
 # dev
 .idea
+*.xml
 venv
+.venv
 .ruff_cache
 .mypy_cache
 
-# content
+# source
 .env
 data

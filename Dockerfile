@@ -1,13 +1,11 @@
-FROM python:3.12.3-alpine3.19
+FROM python:3.12.4-alpine3.20
 
-ENV PYTHONPATH="/src:$PYTHONPATH"
 ENV PYTHONUNBUFFERED=1
-ENV CRUNTIME=1
 
-COPY src /src
-COPY pyproject.toml /
+WORKDIR /app
 
 RUN apk add git
-RUN python3 -m pip install .
 
-ENTRYPOINT ["python3"]
+COPY src /app/src
+COPY pyproject.toml /app
+RUN python3 -m pip install .

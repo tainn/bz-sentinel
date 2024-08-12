@@ -7,15 +7,15 @@ services:
     image: bz-sentinel:0.1.8
     container_name: bz-sentinel
     restart: unless-stopped
-    networks:
-      - bzf
     env_file:
       - .env
+    networks:
+      - bzf
     volumes:
       - /var/data/bz-sentinel:/data
-    command: /src/main.py
     labels:
       - "type=app"
+    command: [ "/app/src/main.py" ]
 
 networks:
   bzf:
