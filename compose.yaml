@@ -14,8 +14,8 @@ services:
     volumes:
       - /var/data/bz-sentinel:/data
     labels:
-      - "type=app"
-    command: [ "/app/src/main.py" ]
+      - "app"
+    command: [ "python3", "/app/src/main.py" ]
 
 networks:
   bzf:
