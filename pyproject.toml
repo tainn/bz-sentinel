@@ -1,6 +1,6 @@
 [project]
 name = "bz-sentinel"
-version = "0.1.11"
+version = "0.1.12"
 readme = "readme.md"
 dependencies = [
     "cordhook @ git+https://github.com/tainn/cordhook.git@0.2.9",
