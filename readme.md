@@ -11,9 +11,6 @@ sensitive `BZS_WEBHOOK_CHANNELS` list.
 
 ## Run
 
-Uses an external network that has to be predefined:
-
 ```console
-docker network create bzf
 docker compose up -d
 ```
