@@ -1,6 +1,7 @@
 FROM ghcr.io/astral-sh/uv:0.4.24-python3.12-alpine
 
 RUN apk add build-base
+RUN apk add git
 
 ENV PYTHONPATH=/app:$PYTHONPATH
 ENV PYTHONUNBUFFERED=1
