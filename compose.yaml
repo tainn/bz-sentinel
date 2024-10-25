@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   bz-sentinel:
     build:
@@ -7,15 +5,15 @@ services:
     image: bz-sentinel:0.1.12
     container_name: bz-sentinel
     restart: unless-stopped
+    networks:
+      - bzflag
     env_file:
       - .env
-    networks:
-      - bzf
     volumes:
       - /var/data/bz-sentinel:/data
     labels:
-      - "app"
-    command: [ "python3", "/app/src/main.py" ]
+      - "type=app"
+    command: [ "uv", "run", "/app/src/main.py" ]
 
 networks:
   bzflag:

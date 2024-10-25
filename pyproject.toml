@@ -1,7 +1,6 @@
 [project]
 name = "bz-sentinel"
 version = "0.1.12"
-readme = "readme.md"
 dependencies = [
     "cordhook @ git+https://github.com/tainn/cordhook.git@0.2.9",
     "httpx==0.27.0",
@@ -10,13 +9,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = [
-    "ruff==0.4.4",
-    "mypy==1.10.0"
-]
-
-[project.urls]
-homepage = "https://github.com/tainn/bz-sentinel"
+dev = ["uv", "ruff"]
 
 [tool.ruff]
 fix = true
@@ -26,27 +19,33 @@ src = ["src"]
 
 [tool.ruff.lint]
 select = [
-    "I001",
-    "F401"
+    "F",
+    "E",
+    "W",
+    "I",
+    "N",
+    "UP",
+    "ANN",
+    "B",
+    "A",
+    "ICN",
+    "PIE",
+    "Q",
+    "RSE",
+    "RET",
+    "SIM",
+    "ARG",
+    "PTH",
 ]
+ignore = ["ANN101"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["src"]
 
 [tool.ruff.format]
+preview = true
 indent-style = "space"
 line-ending = "lf"
 quote-style = "double"
 skip-magic-trailing-comma = false
-
-[tool.mypy]
-strict = true
-disable_error_code = [
-    "no-any-return",
-    "func-returns-value"
-]
-exclude = ["venv"]
-
-[[tool.mypy.overrides]]
-module = ["bs4", "cordhook"]
-ignore_missing_imports = true
+docstring-code-format = true

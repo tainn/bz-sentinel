@@ -1,11 +1,11 @@
-# dev
+# ide
 .idea
 *.iml
-venv
-.venv
-.ruff_cache
-.mypy_cache
 
-# source
+# toolchain
+.ruff_cache
+.venv
+uv.lock
+
+# conf
 .env
-data

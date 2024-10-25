@@ -2,6 +2,7 @@ import json
 import os
 import time
 from dataclasses import dataclass
+from pathlib import Path
 
 import httpx
 from bs4 import BeautifulSoup, ResultSet, Tag
@@ -34,11 +35,11 @@ def main() -> None:
 
     persistence_path: str = "/data/persistence.json"
 
-    if not os.path.exists(persistence_path):
-        with open(persistence_path, "w") as wf:
+    if not Path(persistence_path).exists():
+        with Path(persistence_path).open("w") as wf:
             wf.write("[]")
 
-    with open(persistence_path, "r") as rf:
+    with Path(persistence_path).open() as rf:
         persist: list[str] = json.load(rf)
 
     for entry in entries:
@@ -71,7 +72,7 @@ def main() -> None:
         if len(persist) > int(os.getenv("BZS_PERSIST_QUANTITY", 20)):
             persist.pop(0)
 
-        with open(persistence_path, "w") as wf:
+        with Path(persistence_path).open("w") as wf:
             json.dump(persist, wf, indent=4)
 
         discord_webhook(struct)

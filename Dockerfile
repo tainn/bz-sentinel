@@ -1,12 +1,14 @@
-FROM python:3.12.4-alpine3.20
+FROM ghcr.io/astral-sh/uv:0.4.24-python3.12-alpine
 
-ENV PYTHONUNBUFFERED=1
+RUN apk add build-base
+
 ENV PYTHONPATH=/app:$PYTHONPATH
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-RUN apk add git
-
+COPY pyproject.toml /app/pyproject.toml
 COPY src /app/src
-COPY pyproject.toml /app
-RUN python3 -m pip install .
+
+RUN uv venv
+RUN uv pip install -r pyproject.toml
