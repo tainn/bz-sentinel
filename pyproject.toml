@@ -1,6 +1,6 @@
 [project]
 name = "bz-sentinel"
-version = "0.1.14"
+version = "0.1.15"
 requires-python = ">=3.12"
 dependencies = [
   "cordhook @ git+https://github.com/tainn/cordhook.git@0.2.9",
