@@ -6,7 +6,7 @@ services:
     container_name: bz-sentinel
     restart: unless-stopped
     networks:
-      - bzflag
+      - ffa
     env_file:
       - .env
     volumes:
@@ -16,6 +16,5 @@ services:
     command: [ "uv", "run", "/app/src/main.py" ]
 
 networks:
-  bzflag:
-    name: bzflag
-    driver: bridge
+  ffa:
+    external: true
