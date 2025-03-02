@@ -12,7 +12,7 @@ services:
     volumes:
       - /var/data/bz-sentinel:/data
     labels:
-      - "type=app"
+      - "tainn.type=app"
     command: [ "uv", "run", "/app/src/main.py" ]
 
 networks:
