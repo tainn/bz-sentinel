@@ -6,15 +6,15 @@ services:
     container_name: bz-sentinel
     restart: unless-stopped
     networks:
-      - ffa
+      - int
     env_file:
       - .env
     volumes:
       - /var/data/bz-sentinel:/data
     labels:
       - "tainn.type=app"
-    command: [ "uv", "run", "/app/src/main.py" ]
+    entrypoint: [ "uv", "run", "/app/src/main.py" ]
 
 networks:
-  ffa:
+  int:
     external: true
