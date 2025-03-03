@@ -2,7 +2,7 @@ services:
   bz-sentinel:
     build:
       context: .
-    image: bz-sentinel:0.1.16
+    image: bz-sentinel:0.1.17
     container_name: bz-sentinel
     restart: unless-stopped
     networks:
